@@ -20,6 +20,14 @@ document.addEventListener("DOMContentLoaded", function() {
       })  
     }
 
+    document.getElementById("answer").addEventListener("keydown",function(event)
+    {
+        if(event.key === "Enter")
+        {
+            checkAnswer();
+        }
+    });
+
     runGame("addition");
 })
 
@@ -67,11 +75,12 @@ function checkAnswer() {
 
     if(isCorrect)
     {
-        alert("correct answer")
+        incrementScore();
     }
     else
     {
-        alert(`Incorrect - you answered ${userAnswer}. The answer was ${calculatedAnswer[0]}`);
+        incrementWrongAnswer();
+        console.log(calculatedAnswer[0])
     }
 
     runGame(calculatedAnswer[1]);
@@ -92,19 +101,35 @@ function calculateCorrectAnswer() {
     {
         return [num1 + num2, "addition"];
     }
+    else if(operator === "-")
+    {
+        return [num1 - num2, "subtract"]
+    }
+    else if(operator === "x")
+    {
+        return [num1 * num2, "multiply"]
+    }
     else
     {
-        alert(`Unimplemented operator ${operator}`)
+        return [Math.round(num1/num2), "division"]
     }
 
 }
 
+/**
+ * Gets current score from dom and increments by 1
+ */
 function incrementScore() {
-
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
 }
 
+/**
+ * Gets current score from dom and increments by 1
+ */
 function incrementWrongAnswer() {
-
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 }
 
 function displayAdditionQuestion(num1,num2) {
