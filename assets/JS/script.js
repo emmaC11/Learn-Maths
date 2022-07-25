@@ -14,11 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
         else
         {
             let gameType = this.getAttribute("data-type");
-            alert(`You clicked ${gameType}`);
+            runGame(gameType)
         }
 
       })  
     }
+
+    runGame("addition");
 })
 
 /**
@@ -26,9 +28,31 @@ document.addEventListener("DOMContentLoaded", function() {
  * and after the users answer has been processed
  */
 
-function runGame() {
+function runGame(gameType) {
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
+
+    if(gameType === "addition")
+    {
+        displayAdditionQuestion(num1, num2);
+    }
+    else if(gameType === "subtract")
+    {
+        displaySubtractQuestion(num1,num2);
+    }
+    else if(gameType === "multiply")
+    {
+        displayMultiplyQuestion(num1,num2);
+    }
+    else if(gameType === "division")
+    {
+        displayDivideQuestion(num1,num2);
+    }
+    else
+    {
+        alert(`Unknown game type: ${gameType}`);
+        throw `Unknown game type: ${gameType}. Aborting!`;
+    }
 
 }
 
@@ -48,18 +72,28 @@ function incrementWrongAnswer() {
 
 }
 
-function displayAdditionQuestion() {
-
+function displayAdditionQuestion(num1,num2) {
+    document.getElementById('operand1').textContent = num1
+    document.getElementById('operand2').textContent = num2
+    document.getElementById('operator').textContent = "+"
 }
 
-function displaySubtractQuestion() {
+function displaySubtractQuestion(num1,num2) {
+    document.getElementById('operand1').textContent = num1
+    document.getElementById('operand2').textContent = num2
+    document.getElementById('operator').textContent = "-"
+}
+
+function displayMultiplyQuestion(num1,num2) {
+    document.getElementById('operand1').textContent = num1
+    document.getElementById('operand2').textContent = num2
+    document.getElementById('operator').textContent = "x"
+}
+
+function displayDivideQuestion(num1,num2) {
+    document.getElementById('operand1').textContent = num1
+    document.getElementById('operand2').textContent = num2
+    document.getElementById('operator').textContent = "÷"
     
-}
-
-function displayMultiplyQuestion() {
-    
-}
-
-function displayDivideQuestion() {
     
 }
